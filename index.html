@@ -448,7 +448,7 @@
         Seu guia será enviado pelo WhatsApp.<br>Clique abaixo para receber agora:
       </p>
       <a href="https://wa.me/5511958830360?text=Quero%20meu%20guia%20gratuito%20%F0%9F%94%A5" 
-         onclick="abrirWhatsapp(event)"
+         target="_blank"
          class="link-guia" 
          style="background:#25D366; font-size:13px;">
         💬 Receber Meu Guia no WhatsApp →
@@ -539,27 +539,11 @@
     // Lead aguarda instrução no WhatsApp
   }
 
-  // Função para abrir WhatsApp com fallback
+  // Função para abrir WhatsApp
   function abrirWhatsapp(e) {
     e.preventDefault();
     const msg = encodeURIComponent('Quero meu guia gratuito 🔥');
-    const numero = '5511958830360';
-    // Tenta abrir o app diretamente
-    const appLink = `whatsapp://send?phone=${numero}&text=${msg}`;
-    const webLink = `https://wa.me/${numero}?text=${msg}`;
-    
-    // Detecta mobile
-    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    
-    if (isMobile) {
-      // No mobile tenta o app primeiro
-      window.location.href = appLink;
-      // Fallback para web após 1.5s se app não abrir
-      setTimeout(() => { window.open(webLink, '_blank'); }, 1500);
-    } else {
-      // No desktop abre direto o web
-      window.open(webLink, '_blank');
-    }
+    window.open('https://wa.me/5511958830360?text=' + msg, '_blank');
   }
 
   // Enter no formulário
