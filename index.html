@@ -444,13 +444,19 @@
         Salva o número que vai te contactar —<br>
         vou mandar conteúdo exclusivo por lá.
       </p>
-      <a href="https://drive.google.com/drive/folders/" class="link-guia" target="_blank" style="margin-bottom:12px; display:block;">
-        📄 Baixar Meu Guia Agora →
+      <p style="font-size:13px; color:rgba(245,240,232,0.7); margin-bottom:20px; line-height:1.6;">
+        Seu guia será enviado pelo WhatsApp.<br>Clique abaixo para receber agora:
+      </p>
+      <a href="https://wa.me/5511958830360?text=Quero%20meu%20guia%20gratuito%20%F0%9F%94%A5" 
+         onclick="abrirWhatsapp(event)"
+         class="link-guia" 
+         style="background:#25D366; font-size:13px;">
+        💬 Receber Meu Guia no WhatsApp →
       </a>
-      <a href="https://wa.me/5511958830360?text=Quero%20meu%20guia%20gratuito%20%F0%9F%94%A5" target="_blank" style="display:inline-block; margin-top:8px; background:#25D366; color:#fff; font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; text-decoration:none; padding:14px 32px; border-radius:2px; transition:background 0.2s;">
-        💬 Falar com o Sedutor Sagaz →
-      </a>
-      <p style="margin-top:12px; font-size:11px; color:rgba(136,136,136,0.7);">Clique acima para receber seu conteúdo exclusivo no WhatsApp</p>
+      <p style="margin-top:16px; font-size:11px; color:rgba(136,136,136,0.5); line-height:1.6;">
+        Após clicar, o WhatsApp abre com uma mensagem pronta.<br>
+        É só enviar e aguardar o guia. 🔥
+      </p>
     </div>
 
   </div>
@@ -530,10 +536,30 @@
     // Scroll suave para o topo do card
     document.getElementById('card').scrollIntoView({ behavior: 'smooth', block: 'center' });
     
-    // Redireciona automaticamente para WhatsApp após 3 segundos
-    setTimeout(() => {
-      window.open('https://wa.me/5511958830360?text=Quero%20meu%20guia%20gratuito%20%F0%9F%94%A5', '_blank');
-    }, 3000);
+    // Lead aguarda instrução no WhatsApp
+  }
+
+  // Função para abrir WhatsApp com fallback
+  function abrirWhatsapp(e) {
+    e.preventDefault();
+    const msg = encodeURIComponent('Quero meu guia gratuito 🔥');
+    const numero = '5511958830360';
+    // Tenta abrir o app diretamente
+    const appLink = `whatsapp://send?phone=${numero}&text=${msg}`;
+    const webLink = `https://wa.me/${numero}?text=${msg}`;
+    
+    // Detecta mobile
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      // No mobile tenta o app primeiro
+      window.location.href = appLink;
+      // Fallback para web após 1.5s se app não abrir
+      setTimeout(() => { window.open(webLink, '_blank'); }, 1500);
+    } else {
+      // No desktop abre direto o web
+      window.open(webLink, '_blank');
+    }
   }
 
   // Enter no formulário
